@@ -2,28 +2,35 @@ package com.example.day2.shapes
 
 import com.example.day2.shapes.Rectangle
 
-abstract class Shape(var dim: Double)
+abstract class Shape(open val dim: Double)
 {
     constructor():this(0.0)
-
     abstract fun calcArea( ):Double
-
 }
 
 class Picture
 {
     fun sumAreas(first : Shape ,sec : Shape, third : Shape ) : Double
     {
-
         return first.calcArea() + sec.calcArea() + third.calcArea()
     }
 }
 
 
-class Rectangle(var height :Double ,width : Double) : Shape(width)
+class Rectangle(height :Double ,width : Double) : Shape(width)
 {
+    var height : Double = 0.0
+        get() = field
+        set(value) {
+            field = value
+        }
+
     constructor(width: Double):this(1.0,width)
     constructor():this(1.0,1.0)
+
+    init {
+        this.height = height
+    }
 
     override fun calcArea(): Double {
 
@@ -34,16 +41,33 @@ class Rectangle(var height :Double ,width : Double) : Shape(width)
 
 class Circle( radius : Double ) : Shape(radius)
 {
+    override var dim = radius
+        get() = field
+        set(value) {
+            field = value
+        }
+
     constructor():this(1.0)
 
     override fun calcArea(): Double {
         return dim * dim * 3.14
     }
 }
-class Triangle (var height :Double ,width : Double) : Shape(width)
+
+class Triangle ( height :Double ,width : Double) : Shape(width)
 {
+    var height : Double = 0.0
+        get() = field
+        set(value) {
+            field = value
+        }
     constructor(width: Double):this(1.0,width)
     constructor():this(1.0,1.0)
+
+    init {
+        this.height = height
+    }
+
 
     override fun calcArea(): Double {
         return 0.5 * dim * height
@@ -54,9 +78,11 @@ class Triangle (var height :Double ,width : Double) : Shape(width)
 
 fun main()
 {
-    var tri = Triangle(2.0,1.0)
-    var rec = Rectangle(1.0,1.0)
-    var cir = Circle(5.0)
+    var tri = Triangle(0.0,1.0)
+    var rec = Rectangle(0.0,1.0)
+    var cir = Circle(10.0)
+
+
 
     var pic = Picture()
 
