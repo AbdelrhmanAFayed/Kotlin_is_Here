@@ -1,6 +1,5 @@
 package com.example.day6.fifth
 
-import kotlinx.coroutines.async
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
