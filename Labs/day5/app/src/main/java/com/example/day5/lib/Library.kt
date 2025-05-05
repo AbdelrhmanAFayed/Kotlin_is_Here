@@ -1,5 +1,6 @@
-package com.example.day5
+package com.example.day5.lib
 
+import kotlin.collections.iterator
 
 
 abstract class Person(var name : String,var iD : Int )
@@ -118,4 +119,10 @@ object LibraryDataBase
         }
         return availableItems
     }
+}
+
+
+fun main()
+{
+
 }
