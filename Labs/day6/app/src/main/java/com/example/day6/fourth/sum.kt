@@ -1,5 +1,7 @@
 package com.example.day6.fourth
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.yield
 
@@ -15,15 +17,17 @@ suspend fun sum(nums : List<String>) : Double {
     return sums
 }
 
-fun main()
+suspend fun main()
 {
     println("Enter a list of numbers ")
 
     val input = readLine().orEmpty()
     val tokens = input.split(" ").filter { it.isNotBlank() }
 
-    runBlocking {
-        println(sum(tokens))
+    val job = GlobalScope.async {
+        sum(tokens)
     }
+
+    println(job.await())
 
 }
