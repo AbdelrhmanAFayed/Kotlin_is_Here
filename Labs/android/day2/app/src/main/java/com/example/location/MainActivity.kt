@@ -3,6 +3,7 @@ package com.example.location
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.Intent.ACTION_SENDTO
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.net.Uri
@@ -62,10 +63,12 @@ class MainActivity : AppCompatActivity() {
 
         btnSMS.setOnClickListener {
 
-            val smsIntent = Intent(Intent.ACTION_VIEW)
-            smsIntent.data = "sms: 01091646183".toUri()
+            val smsIntent = Intent().apply {
+                action = ACTION_SENDTO
+                data = "sms: 01091646183".toUri()
+                putExtra("sms_body", "Hi, My Current Location is $address")
+            }
 
-            smsIntent.putExtra("sms_body", "Hi, My Current Location is $address")
             startActivity(smsIntent)
         }
 
