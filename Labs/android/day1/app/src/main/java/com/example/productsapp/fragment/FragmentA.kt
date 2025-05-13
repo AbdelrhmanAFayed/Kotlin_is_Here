@@ -41,9 +41,10 @@ class FragmentA : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerProducts)
         myLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
 
-        myAdapter = ProductAdapter(products) {
-            Toast.makeText(context,it.toString(), Toast.LENGTH_SHORT).show()
+        myAdapter = ProductAdapter {
         }
+
+        myAdapter.submitList(products)
         recyclerView.apply {
             adapter = myAdapter
             layoutManager = myLayoutManager
