@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productsapp.model.Product
+import com.example.productsapp.model.ProductDiffCallback
 
-class ProductAdapter(var products: List<Product> , var listener: (Product) -> Unit) :
-    RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
+
+class ProductAdapter (var listener : (Product) -> Unit ) : ListAdapter<Product, ProductAdapter.ProductHolder> (ProductDiffCallback())
+{
 
     class ProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val txtTitle : TextView = view.findViewById(R.id.textTitle)
@@ -31,12 +34,11 @@ class ProductAdapter(var products: List<Product> , var listener: (Product) -> Un
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
 
-        val product = products[position]
+        val product = getItem(position)
+
         holder.txtTitle.text = product.title
         holder.imgProduct.setImageResource(R.drawable.ic_launcher_foreground)
         holder.constraintLayout.setOnClickListener { listener(product) }
 
     }
-
-    override fun getItemCount(): Int = products.size
 }
