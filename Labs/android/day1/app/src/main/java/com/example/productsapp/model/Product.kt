@@ -19,5 +19,5 @@ data class Product(
     val returnPolicy: String = "Very",
     val minimumOrderQuantity: Int = 3,
     val images: List<String> = listOf<String>() ,
-    val thumbnail: String = ""
+    val thumbnail: String = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/1920px-Cat_August_2010-4.jpg"
 )

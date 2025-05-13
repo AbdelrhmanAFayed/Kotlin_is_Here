@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.productsapp.model.Product
 import com.example.productsapp.model.ProductDiffCallback
 
@@ -37,6 +38,7 @@ class ProductAdapter (var listener : (Product) -> Unit ) : ListAdapter<Product, 
         val product = getItem(position)
 
         holder.txtTitle.text = product.title
+        Glide.with(holder.imgProduct.context).load(product.thumbnail).into(holder.imgProduct)
         holder.imgProduct.setImageResource(R.drawable.ic_launcher_foreground)
         holder.constraintLayout.setOnClickListener { listener(product) }
 
