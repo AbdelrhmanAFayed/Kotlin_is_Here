@@ -15,6 +15,10 @@ import com.google.gson.Gson
 
 
 class FragmentB : Fragment() {
+    companion object
+    {
+        private var currentProduct: Product? = null
+    }
 
     private lateinit var productImage: ImageView
     private lateinit var productTitle: TextView
@@ -22,7 +26,6 @@ class FragmentB : Fragment() {
     private lateinit var productRating: RatingBar
     private lateinit var productDescription: TextView
 
-    private var currentProduct: Product? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,7 @@ class FragmentB : Fragment() {
                     e.printStackTrace()
                 }
             }
+            else currentProduct?.let { updateProduct(it) }
         }
     }
 
