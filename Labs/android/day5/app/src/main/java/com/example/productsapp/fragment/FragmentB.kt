@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.productsapp.R
+import com.examxple.productsapp.R
 import com.example.productsapp.model.Product
 import com.google.gson.Gson
 

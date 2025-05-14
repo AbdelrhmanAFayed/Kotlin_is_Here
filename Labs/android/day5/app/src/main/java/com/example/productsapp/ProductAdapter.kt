@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.productsapp.model.Product
 import com.example.productsapp.model.ProductDiffCallback
+import com.examxple.productsapp.R
 
 
 class ProductAdapter (var listener : (Product) -> Unit ) : ListAdapter<Product, ProductAdapter.ProductHolder> (ProductDiffCallback())

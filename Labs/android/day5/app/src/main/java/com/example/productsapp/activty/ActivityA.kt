@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.annotation.LongDef
 import androidx.appcompat.app.AppCompatActivity
 import com.example.productsapp.Communicator
-import com.example.productsapp.R
+import com.examxple.productsapp.R
 import com.example.productsapp.fragment.FragmentA
 import com.example.productsapp.fragment.FragmentB
 import com.example.productsapp.model.Product
