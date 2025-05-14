@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Constraints
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
@@ -34,7 +36,9 @@ class   FragmentA : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        myWorkRequest = OneTimeWorkRequestBuilder<MyWorker>().build()
+        myWorkRequest = OneTimeWorkRequestBuilder<MyWorker>()
+            .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
+            .build()
         WorkManager.getInstance(requireContext()).enqueue(myWorkRequest)
         result = WorkManager.getInstance(requireContext()).getWorkInfoByIdLiveData(myWorkRequest.id)
 
