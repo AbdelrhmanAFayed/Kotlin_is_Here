@@ -1,12 +1,12 @@
-package com.example.productsapp.model.db
+package com.example.productsco.model.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.productsapp.model.Product
+import com.example.productsco.model.Product
 
-@Database(entities = arrayOf(Product::class), version = 1)
+@Database(entities = [Product::class], version = 1 , exportSchema = false)
 abstract class ProductDataBase : RoomDatabase() {
 
     abstract fun getProductDao() : ProductDao

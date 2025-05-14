@@ -12,6 +12,7 @@ import com.example.productsco.Communicator
 import com.example.productsco.ProductAdapter
 import com.example.productsco.R
 import com.example.productsco.model.Product
+import com.example.productsco.model.db.ProductDataBase
 import com.example.productsco.model.network.RetroFitHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,15 +33,29 @@ class   FragmentA : Fragment() {
 
                 val service = RetroFitHelper.service
                 val result = service.getProducts()
-                val resultProducts = result.body()?.products
-                withContext(Dispatchers.Main) {
-                    myAdapter.submitList(resultProducts)
-                }
 
+
+                if(result.isSuccessful)
+                {
+                    var resultProducts = result.body()?.products
+                    if (resultProducts != null) {
+                        for (element in resultProducts) {
+                            ProductDataBase.getInstance(requireContext()).getProductDao().insert(element)
+
+                        }
+                    }
+                    withContext(Dispatchers.Main) {
+                        myAdapter.submitList(resultProducts)
+                    }
+
+                }
             }
             catch (th : Throwable)
             {
-                th.printStackTrace()
+                var resultProducts = ProductDataBase.getInstance(requireContext()).getProductDao().getAll()
+                withContext(Dispatchers.Main) {
+                    myAdapter.submitList(resultProducts)
+                }
             }
 
         }
