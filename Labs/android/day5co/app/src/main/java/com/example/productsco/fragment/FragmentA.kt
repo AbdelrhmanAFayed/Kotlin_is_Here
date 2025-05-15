@@ -47,7 +47,6 @@ class   FragmentA : Fragment() {
                     withContext(Dispatchers.Main) {
                         myAdapter.submitList(resultProducts)
                     }
-
                 }
             }
             catch (th : Throwable)
@@ -57,7 +56,6 @@ class   FragmentA : Fragment() {
                     myAdapter.submitList(resultProducts)
                 }
             }
-
         }
     }
 
@@ -66,7 +64,6 @@ class   FragmentA : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_a, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,15 +74,12 @@ class   FragmentA : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerProducts)
         myLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
 
-        myAdapter = ProductAdapter {
-            (activity as Communicator).updateProduct(it)
-        }
-
+        myAdapter = ProductAdapter { (activity as Communicator).updateProduct(it) }
         myAdapter.submitList(products)
+
         recyclerView.apply {
             adapter = myAdapter
             layoutManager = myLayoutManager
         }
-
     }
 }
