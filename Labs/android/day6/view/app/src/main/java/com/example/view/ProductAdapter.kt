@@ -17,7 +17,7 @@ class ProductAdapter (var listener : (Product) -> Unit ) : ListAdapter<Product, 
 {
     lateinit var binding: ItemBinding
 
-    class ProductHolder(var binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ProductHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(
@@ -25,7 +25,7 @@ class ProductAdapter (var listener : (Product) -> Unit ) : ListAdapter<Product, 
         viewType: Int
     ): ProductHolder {
         val inflater : LayoutInflater = LayoutInflater.from(parent.context)
-        binding = ItemBinding.inflate(inflater,parent,false)
+         binding = ItemBinding.inflate(inflater,parent,false)
         return ProductHolder(binding)
     }
 
@@ -33,9 +33,9 @@ class ProductAdapter (var listener : (Product) -> Unit ) : ListAdapter<Product, 
 
         val product = getItem(position)
 
-        binding.textTitle.text = product.title
-        Glide.with(binding.imageView.context).load(product.thumbnail).into(binding.imageView)
-        binding.layoutItem.setOnClickListener { listener(product) }
+        holder.binding.textTitle.text = product.title
+        Glide.with(holder.binding.imageView.context).load(product.thumbnail).into(holder.binding.imageView)
+        holder.binding.layoutItem.setOnClickListener { listener(product) }
 
     }
 }

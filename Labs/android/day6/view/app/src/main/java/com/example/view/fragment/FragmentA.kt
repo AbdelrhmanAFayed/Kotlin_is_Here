@@ -31,6 +31,32 @@ class   FragmentA : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentABinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        products = emptyList()
+
+        myLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
+
+        myAdapter = ProductAdapter { (activity as Communicator).updateProduct(it) }
+
+        myAdapter.submitList(products)
+
+        binding.recyclerProducts.apply {
+            adapter = myAdapter
+            layoutManager = myLayoutManager
+        }
         lifecycleScope.launch(Dispatchers.IO)
         {
             try {
@@ -51,7 +77,7 @@ class   FragmentA : Fragment() {
                     withContext(Dispatchers.Main) {
                         Log.d("From Network", "The number of products in API ${resultProducts?.size} ")
                         myAdapter.submitList(resultProducts)
-                       Log.i("TAG", "Products: ${myAdapter.itemCount}")
+                        Log.i("TAG", "Products: ${myAdapter.itemCount}")
                     }
                 }
             }
@@ -65,30 +91,6 @@ class   FragmentA : Fragment() {
 
                 }
             }
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentABinding.inflate(inflater,container,false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        products = mutableListOf<Product>()
-
-        myLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL,false)
-
-        myAdapter = ProductAdapter { (activity as Communicator).updateProduct(it) }
-        myAdapter.submitList(products)
-
-        binding.recyclerProducts.apply {
-            adapter = myAdapter
-            layoutManager = myLayoutManager
         }
     }
 }
